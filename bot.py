@@ -64,7 +64,7 @@ def buy_slave():
                 fetter_text = fetter_request.text
                 print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
 
-                # Задержка для обхода бана за флуд
+            # Задержка для обхода бана за флуд
             sleep(delay + randint(-1, 1))
         except Exception as e:
             print(e)
