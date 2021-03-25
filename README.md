@@ -48,7 +48,7 @@
   - sh vk-slaves-bot/termux.sh
 - Редактируем файл `config.json` по инструкции для Windows или перекидываем с компьютера имеющийся. Как сделать это, можете посмотреть на YouTube или почитать в интернете.
 
-Запуск: `python vk-slaves-bot/bot.py`
+Запуск: `sh vk-slaves-bot/launch.sh`
 
 ## Установка на Testflight (iOS)
 
