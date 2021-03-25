@@ -40,7 +40,7 @@
 	- pkg install -y git
 	- git clone https://github.com/monosans/vk-slaves-bot
 	- sh vk-slaves-bot/termux.sh
-- Редактируем файл **config.json** или перекидываем с компьютера имеющийся. Как сделать это, можете посмотреть на YouTube или почитать в интернете.
+- Редактируем файл **config.json** по инструкции для Windows или перекидываем с компьютера имеющийся. Как сделать это, можете посмотреть на YouTube или почитать в интернете.
 
 Запуск: python vk-slaves-bot/bot.py
 
