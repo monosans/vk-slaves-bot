@@ -29,12 +29,12 @@ def buy_slave():
             # Вывод информации о профиле
             profile = loads(buySlave.text)
             print(
-                f"""Баланс: {profile["balance"]}
-Рабов: {profile["slaves_count"]}
-Доход в минуту: {profile["slaves_profit_per_min"]}"""
+                f"""Баланс: {profile['balance']}
+Рабов: {profile['slaves_count']}
+Доход в минуту: {profile['slaves_profit_per_min']}"""
             )
 
-            # Даёт рабу работу
+            # Даёт работу
             job_request = requests.post(
                 "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
                 headers={
@@ -49,20 +49,20 @@ def buy_slave():
             job_text = job_request.text
             print(f"Дал работу vk.com/id{loads(job_text)['slave']['id']}")
 
-            # Надевает оковы
-            # if config["buy_fetters"] == 1:
-            #     fetter_request = requests.post(
-            #         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
-            #         headers={
-            #             "Content-Type": "application/json",
-            #             "authorization": auth,
-            #         },
-            #         json={
-            #             "slave_id": rand_slave,
-            #         },
-            #     )
-            #     fetter_text = fetter_request.text
-            #     print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
+            # Покупает оковы
+            if config["buy_fetters"] == 1:
+                fetter_request = requests.post(
+                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
+                    headers={
+                        "Content-Type": "application/json",
+                        "authorization": auth,
+                    },
+                    json={
+                        "slave_id": rand_slave,
+                    },
+                )
+                fetter_text = fetter_request.text
+                print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
 
             # Задержка для обхода бана за флуд
             sleep(delay + randint(-1, 1))
