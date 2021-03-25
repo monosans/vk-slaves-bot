@@ -50,19 +50,19 @@ def buy_slave():
             print(f"Дал работу vk.com/id{loads(job_text)['slave']['id']}")
 
             # Надевает оковы
-            if config["buy_fetters"] == 1:
-                fetter_request = requests.post(
-                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
-                    headers={
-                        "Content-Type": "application/json",
-                        "authorization": auth,
-                    },
-                    json={
-                        "slave_id": rand_slave,
-                    },
-                )
-                fetter_text = fetter_request.text
-                print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
+            # if config["buy_fetters"] == 1:
+            #     fetter_request = requests.post(
+            #         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
+            #         headers={
+            #             "Content-Type": "application/json",
+            #             "authorization": auth,
+            #         },
+            #         json={
+            #             "slave_id": rand_slave,
+            #         },
+            #     )
+            #     fetter_text = fetter_request.text
+            #     print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
 
             # Задержка для обхода бана за флуд
             sleep(delay + randint(-1, 1))

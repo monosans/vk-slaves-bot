@@ -4,6 +4,8 @@
 
 **Если возникнут какие-либо проблемы при установке или использовании, пишите в ВК [@id607137534](https://vk.com/id607137534)**.
 
+Если в консоль пишется какой-то бред, значит у Вас бан на пару часов.
+
 ## Установка на Windows
 
 - Устанавливаем [Python](https://www.python.org/downloads/windows). Во время установки ставим галочку **Add Python to PATH (Добавить Python в PATH)**
@@ -35,7 +37,6 @@
 - Запускаем Termux.
 - Пишем по порядку:
 	- cd
-	- pkg update -y
 	- pkg install -y git
 	- git clone https://github.com/monosans/vk-slaves-bot
 	- sh vk-slaves-bot/termux.sh
