@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+"""Versiya dlya teh, u kogo pri zapuske oshibka Non-ASCII character"""
+
 from json import load, loads
 from random import randint
 from threading import Thread
@@ -8,15 +11,9 @@ import requests
 
 
 def buy_slave():
-    """
-    Покупает рабов, даёт работу. Надевает оковы, если включено в config.json.
-    """
     while True:
         try:
-            # Случайный ID пользователя в промежутке
             rand_slave = randint(1, 646412830)
-
-            # Покупка раба
             buySlave = requests.post(
                 "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buySlave",
                 headers={
@@ -25,16 +22,12 @@ def buy_slave():
                 },
                 json={"slave_id": rand_slave},
             )
-
-            # Вывод информации о профиле
             profile = loads(buySlave.text)
             print(
-                f"""Баланс: {profile['balance']}
-Рабов: {profile['slaves_count']}
-Доход в минуту: {profile['slaves_profit_per_min']}"""
+                f"""Balance: {profile['balance']}
+Rabov: {profile['slaves_count']}
+Dohod d minutu: {profile['slaves_profit_per_min']}"""
             )
-
-            # Даёт работу
             job_request = requests.post(
                 "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
                 headers={
@@ -47,9 +40,7 @@ def buy_slave():
                 },
             )
             job_text = job_request.text
-            print(f"Дал работу vk.com/id{loads(job_text)['slave']['id']}")
-
-            # Покупает оковы
+            print(f"Dal rabotu vk.com/id{loads(job_text)['slave']['id']}")
             if config["buy_fetters"] == 1:
                 fetter_request = requests.post(
                     "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
@@ -62,19 +53,15 @@ def buy_slave():
                     },
                 )
                 fetter_text = fetter_request.text
-                print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
-
-            # Задержка для обхода бана за флуд
+                print(f"Kupil okovy vk.com/id{loads(fetter_text)['id']}")
             sleep(delay + randint(-1, 1))
         except Exception as e:
             print(e)
 
 
 def buy_fetter():
-    """Покупает оковы тем, у кого их нет."""
     while True:
         try:
-            # Получение полной информации об аккаунте
             start = loads(
                 requests.get(
                     "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/start",
@@ -84,12 +71,8 @@ def buy_fetter():
                     },
                 ).text,
             )
-
-            # Перебор списка рабов
             for slave in start["slaves"]:
-                # Проверка на наличие оков
                 if slave["fetter_to"] == 0:
-                    # Покупка оков
                     requests.post(
                         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
                         headers={
@@ -100,16 +83,13 @@ def buy_fetter():
                             "slave_id": slave["id"],
                         },
                     )
-                    print(f"Купил оковы vk.com/id{slave['id']}")
-
-                    # Задержка для обхода бана за флуд
+                    print(f"Kupil okovy vk.com/id{slave['id']}")
                     sleep(delay + randint(-1, 1))
         except Exception as e:
             print(e)
 
 
 def job_slave():
-    """Даёт безработным работу."""
     while True:
         try:
             start = loads(
@@ -121,12 +101,8 @@ def job_slave():
                     },
                 ).text,
             )
-
-            # Перебор списка рабов
             for slave in start["slaves"]:
-                # Проверка на наличие у раба работы
                 if not slave["job"]["name"]:
-                    # Даёт рабу работу
                     requests.post(
                         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
                         headers={
@@ -138,9 +114,7 @@ def job_slave():
                             "name": job,
                         },
                     )
-                    print(f"Дал работу vk.com/id{slave['id']}")
-
-                    # Задержка для обхода бана за флуд
+                    print(f"Dal rabotu vk.com/id{slave['id']}")
                     sleep(delay + randint(-1, 1))
         except Exception as e:
             print(e)
