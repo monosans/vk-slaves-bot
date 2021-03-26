@@ -48,7 +48,7 @@
 
 ## Установка на Termux (Android)
 
-- Устанавливаем Termux, желательно с F-Droid, т.к. в Google Play разработчик его больше не обновляет.
+- Устанавливаем Termux, желательно с (F-Droid)[https://f-droid.org/repo/com.termux_108.apk], т.к. в Google Play разработчик его больше не обновляет.
 - Запускаем Termux.
 - Пишем по порядку:
   - cd
