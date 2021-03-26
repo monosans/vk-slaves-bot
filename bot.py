@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from json import load, loads
-from random import randint
+from random import randint, random
 from threading import Thread
 from time import sleep
 
@@ -69,7 +69,7 @@ def buy_slave():
                 print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
 
             # Задержка для обхода бана за флуд
-            sleep(delay + randint(-1, 1))
+            sleep(delay + random())
         except Exception as e:
             print(e)
 
@@ -109,7 +109,7 @@ def buy_fetter():
                     print(f"Купил оковы vk.com/id{slave['id']}")
 
                     # Задержка для обхода бана за флуд
-                    sleep(delay + randint(-1, 1))
+                    sleep(delay + random())
         except Exception as e:
             print(e)
 
@@ -149,7 +149,7 @@ def job_slave():
                     print(f"Дал работу vk.com/id{slave['id']}")
 
                     # Задержка для обхода бана за флуд
-                    sleep(delay + randint(-1, 1))
+                    sleep(delay + random())
         except Exception as e:
             print(e)
 
