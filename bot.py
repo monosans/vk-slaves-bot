@@ -22,6 +22,7 @@ def buy_slave():
                 headers={
                     "Content-Type": "application/json",
                     "authorization": auth,
+                    "User-agent": "Mozilla/5.0",
                 },
                 json={"slave_id": rand_slave},
             )
@@ -40,6 +41,7 @@ def buy_slave():
                 headers={
                     "Content-Type": "application/json",
                     "authorization": auth,
+                    "User-agent": "Mozilla/5.0",
                 },
                 json={
                     "slave_id": rand_slave,
@@ -56,6 +58,7 @@ def buy_slave():
                     headers={
                         "Content-Type": "application/json",
                         "authorization": auth,
+                        "User-agent": "Mozilla/5.0",
                     },
                     json={
                         "slave_id": rand_slave,
@@ -81,6 +84,7 @@ def buy_fetter():
                     headers={
                         "Content-Type": "application/json",
                         "authorization": auth,
+                        "User-agent": "Mozilla/5.0",
                     },
                 ).text,
             )
@@ -95,6 +99,7 @@ def buy_fetter():
                         headers={
                             "Content-Type": "application/json",
                             "authorization": auth,
+                            "User-agent": "Mozilla/5.0",
                         },
                         json={
                             "slave_id": slave["id"],
@@ -118,6 +123,7 @@ def job_slave():
                     headers={
                         "Content-Type": "application/json",
                         "authorization": auth,
+                        "User-agent": "Mozilla/5.0",
                     },
                 ).text,
             )
@@ -132,6 +138,7 @@ def job_slave():
                         headers={
                             "Content-Type": "application/json",
                             "authorization": auth,
+                            "User-agent": "Mozilla/5.0",
                         },
                         json={
                             "slave_id": slave["id"],
