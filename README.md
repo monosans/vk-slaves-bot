@@ -48,14 +48,14 @@
 
 ## Установка на Termux (Android)
 
-- Устанавливаем Termux, желательно с (F-Droid)[https://f-droid.org/repo/com.termux_108.apk], т.к. в Google Play разработчик его больше не обновляет.
+- Устанавливаем Termux, желательно с [F-Droid](https://f-droid.org/repo/com.termux_108.apk), т.к. в Google Play разработчик его больше не обновляет.
 - Запускаем Termux.
 - Пишем по порядку:
   - cd
   - pkg install -y git
   - git clone https://github.com/monosans/vk-slaves-bot
   - sh vk-slaves-bot/termux.sh
-- Редактируем файл `config.json` по инструкции для Windows или перекидываем с компьютера имеющийся. Как сделать это, можете посмотреть на YouTube или почитать в интернете.
+- Редактируем файл `config.json` командой `nano vk-slaves-bot/config.json` по инструкции для Windows или перекидываем с компьютера имеющийся. Как сделать это, можете посмотреть на YouTube или почитать в интернете.
 
 Запуск: `sh vk-slaves-bot/launch.sh`
 
