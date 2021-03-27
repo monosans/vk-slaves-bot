@@ -36,22 +36,6 @@ def buy_slave():
 Доход в минуту: {profile['slaves_profit_per_min']}"""
             )
 
-            # Даёт работу
-            job_request = requests.post(
-                "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
-                headers={
-                    "Content-Type": "application/json",
-                    "authorization": auth,
-                    "User-agent": "Mozilla/5.0",
-                },
-                json={
-                    "slave_id": rand_slave,
-                    "name": job,
-                },
-            )
-            job_text = job_request.text
-            print(f"Дал работу vk.com/id{loads(job_text)['slave']['id']}")
-
             # Покупает оковы
             if config["buy_fetters"] == 1:
                 fetter_request = requests.post(
@@ -89,6 +73,10 @@ def buy_fetter():
                 ).text,
             )
 
+            if config["buy_slaves"] == 1:
+                # Удаление из списка первого раба,
+                # чтобы не происходило коллизии с методом buy_slave
+                del start["slaves"][0]
             # Перебор списка рабов
             for slave in start["slaves"]:
                 # Проверка на наличие оков
