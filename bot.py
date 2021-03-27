@@ -54,10 +54,11 @@ def buy_slave():
                         },
                     )
                     fetter_text = fetter_request.text
-                    print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
+                    if "422" not in str(fetter_text):
+                    	print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
                     sleep(delay + random())
         except Exception as e:
-            if not "Expecting value: line 1 column 1 (char 0)" in str(e):
+            if "Expecting value: line 1 column 1 (char 0)" not in str(e):
                 print(e)
             sleep(delay + random())
 
@@ -102,7 +103,7 @@ def buy_fetter():
                             print(f"Купил оковы vk.com/id{slave['id']}")
                         sleep(delay + random())
         except Exception as e:
-            if not "Expecting value: line 1 column 1 (char 0)" in str(e):
+            if "Expecting value: line 1 column 1 (char 0)" not in str(e):
                 print(e)
             sleep(delay + random())
 
@@ -140,11 +141,12 @@ def job_slave():
                             "name": job,
                         },
                     )
+                    #print(str(req)+"143")
                     if "422" not in str(req):
                         print(f"Дал работу vk.com/id{slave['id']}")
                     sleep(delay + random())
         except Exception as e:
-            if not "Expecting value: line 1 column 1 (char 0)" in str(e):
+            if "Expecting value: line 1 column 1 (char 0)" not in str(e):
                 print(e)
             sleep(delay + random())
 
