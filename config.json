@@ -1,8 +1,9 @@
 {
 	"authorization": "",
-	"invisible_slaves": 0,
-	"buy_slaves": 1,
 	"buy_fetters": 1,
-	"job": "@free_slaves_bot",
-	"delay": 4.5
+	"buy_slaves": 1,
+  	"invisible_slaves": 1,
+    "invisible_fetters": 1,
+	"delay": 4.5,
+	"job": "@free_slaves_bot"
 }
