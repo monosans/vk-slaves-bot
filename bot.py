@@ -150,6 +150,6 @@ if __name__ == "__main__":
     job = config["job"]
     if config["buy_slaves"] == 1:
         Thread(target=buy_slave).start()
-    if config["buy_fetters"] == 1 and config["invisible_slaves"] == 1:
+    if config["buy_fetters"] == 1:
         Thread(target=buy_fetter).start()
     Thread(target=job_slave).start()

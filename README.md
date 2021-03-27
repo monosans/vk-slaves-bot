@@ -1,6 +1,6 @@
 # vk-slaves-bot
 
-Бот для мини-игры ["Рабы" ("Рабство")](https://vk.com/app7794757) ВК с возможностью покупать невидимых рабов.
+Бот для мини-игры ["Рабы" ("Рабство")](https://vk.com/app7794757) ВК с возможностью покупки невидимых рабов.
 
 [Группа в ВК](https://vk.com/club203543653), в ней публикуются новости и другая полезная информация. У группы есть [беседа](https://vk.me/join/d4lmYy0XQdusTdgdW3acrqXcaH_plolkc7o=), в которой можете задавать вопросы.
 
@@ -56,7 +56,7 @@
   - pkg install -y git
   - git clone https://github.com/monosans/vk-slaves-bot
   - sh vk-slaves-bot/termux.sh
-- Редактируем файл `config.json` командой `nano vk-slaves-bot/config.json` по инструкции для Windows.
+- Редактируем файл `config.json` командой `nano vk-slaves-bot/config.json` по инструкции для Windows. Для удобства можете скачать Hacker's Keyboard в Google Play. В ней есть стрелочки для управления курсором в горизонтальном положении.
 - Когда файл отредактирован, для сохранения нажмите Ctrl-O, Enter, Ctrl-X.
 
 Запуск: `sh vk-slaves-bot/launch.sh`
