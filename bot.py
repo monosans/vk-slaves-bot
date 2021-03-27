@@ -15,8 +15,8 @@ def buy_slave():
     while True:
         try:
             if config["invisible_slaves"] == 1:
-                # Случайный ID группы в промежутке
-                rand_slave = randint(-999999999, 999999999)
+                # Случайный невидимый ID в промежутке
+                rand_slave = randint(-999999999, -1)
             else:
                 # Случайный ID пользователя в промежутке
                 rand_slave = randint(1, 646412830)
