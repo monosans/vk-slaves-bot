@@ -46,7 +46,7 @@ def buy_slave():
                 )
                 print(f"==========================")
                 # Покупает оковы
-                if config["buy_fetters"] == 1:
+                if config["buy_fetters"] == 1 and config["invisible_slaves"] == 0: 
                     fetter_request = requests.post(
                         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
                         headers={
