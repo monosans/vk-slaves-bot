@@ -33,30 +33,31 @@ def buy_slave():
 
             # Вывод информации о профиле
             profile = loads(buySlave.text)
-            print(
-                f"""Баланс: {profile['balance']}
+            if "422" not in str(profile):
+                print(
+                    f"""Баланс: {profile['balance']}
 Рабов: {profile['slaves_count']}
 Доход в минуту: {profile['slaves_profit_per_min']}"""
-            )
-
-            # Покупает оковы
-            if config["buy_fetters"] == 1:
-                fetter_request = requests.post(
-                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
-                    headers={
-                        "Content-Type": "application/json",
-                        "authorization": auth,
-                        "User-agent": "Mozilla/5.0",
-                    },
-                    json={
-                        "slave_id": rand_slave,
-                    },
                 )
-                fetter_text = fetter_request.text
-                print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
-                sleep(delay + random())
+
+                # Покупает оковы
+                if config["buy_fetters"] == 1:
+                    fetter_request = requests.post(
+                        "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
+                        headers={
+                            "Content-Type": "application/json",
+                            "authorization": auth,
+                            "User-agent": "Mozilla/5.0",
+                        },    
+                        json={
+                            "slave_id": rand_slave,
+                        },
+                    )
+                    fetter_text = fetter_request.text
+                    print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
+                    sleep(delay + random())
         except Exception as e:
-            if not "line" in str(e):
+            if not "Expecting value: line 1 column 1 (char 0)" in str(e):
                 print(e)
             sleep(delay + random())
 
@@ -86,7 +87,7 @@ def buy_fetter():
                 # Проверка на наличие оков
                 if slave["fetter_to"] == 0 and slave["id"] >= 1:
                     # Покупка оков
-                    requests.post(
+                        req = requests.post(
                         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
                         headers={
                             "Content-Type": "application/json",
@@ -97,11 +98,12 @@ def buy_fetter():
                             "slave_id": slave["id"],
                         },
                     )
-                    print(f"Купил оковы vk.com/id{slave['id']}")
-                    sleep(delay + random())
+                        if "422" not in str(req):
+                            print(f"Купил оковы vk.com/id{slave['id']}")
+                        sleep(delay + random())
         except Exception as e:
-            if not "line" in str(e):
-            	print(e)
+            if not "Expecting value: line 1 column 1 (char 0)" in str(e):
+                print(e)
             sleep(delay + random())
 
 
@@ -125,7 +127,8 @@ def job_slave():
                 # Проверка на наличие у раба работы
                 if not slave["job"]["name"]:
                     # Даёт рабу работу
-                    requests.post(
+
+                    req = requests.post(
                         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
                         headers={
                             "Content-Type": "application/json",
@@ -137,11 +140,12 @@ def job_slave():
                             "name": job,
                         },
                     )
-                    print(f"Дал работу vk.com/id{slave['id']}")
+                    if "422" not in str(req):
+                        print(f"Дал работу vk.com/id{slave['id']}")
                     sleep(delay + random())
         except Exception as e:
-            if not "line" in str(e):
-            	print(e)
+            if not "Expecting value: line 1 column 1 (char 0)" in str(e):
+                print(e)
             sleep(delay + random())
 
 
