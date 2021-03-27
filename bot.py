@@ -83,7 +83,7 @@ def buy_fetter():
             # Перебор списка рабов
             for slave in start["slaves"]:
                 # Проверка на наличие оков
-                if slave["fetter_to"] == 0:
+                if slave["fetter_to"] == 0 and slave["id"] >= 1:
                     # Покупка оков
                     requests.post(
                         "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
@@ -150,6 +150,6 @@ if __name__ == "__main__":
     job = config["job"]
     if config["buy_slaves"] == 1:
         Thread(target=buy_slave).start()
-    if config["buy_fetters"] == 1:
+    if config["buy_fetters"] == 1 and config["invisible_slaves"] == 1:
         Thread(target=buy_fetter).start()
     Thread(target=job_slave).start()
