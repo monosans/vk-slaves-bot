@@ -14,9 +14,12 @@ def buy_slave():
     """
     while True:
         try:
-            # Случайный ID пользователя в промежутке
-            rand_slave = randint(1, 646412830)
-
+            if config["invisible_slaves"] == 1:
+                # Случайный ID группы в промежутке
+                rand_slave = randint(-999999999, 999999999)
+            else:
+                # Случайный ID пользователя в промежутке
+                rand_slave = randint(1, 646412830)
             # Покупка раба
             buySlave = requests.post(
                 "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buySlave",

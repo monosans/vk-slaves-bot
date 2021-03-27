@@ -1,5 +1,6 @@
 {
 	"authorization": "",
+	"invisible_slaves": 0,
 	"buy_slaves": 1,
 	"buy_fetters": 1,
 	"job": "@free_slaves_bot",
