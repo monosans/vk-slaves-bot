@@ -4,5 +4,8 @@
 	"buy_slaves": 1,
 	"buy_fetters": 1,
 	"job": "@free_slaves_bot",
-	"delay": 4.5
+	"delay": 4.5,
+	"abuse_slaves" : 1,
+	"minimum_balance": 5000000,
+	"your_id": 123
 }

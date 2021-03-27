@@ -7,8 +7,70 @@ from time import sleep
 
 import requests
 
+def buy_slave(id):
+	return requests.post(
+                "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buySlave",
+                headers={
+                    "Content-Type": "application/json",
+                    "authorization": auth,
+                    "User-agent": "Mozilla/5.0",
+                },
+                json={"slave_id": id},
+            )
+			
+def sell_slave(id):
+    return requests.post(
+                "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/saleSlave",
+                headers={
+                    "Content-Type": "application/json",
+                    "authorization": auth,
+                    "User-agent": "Mozilla/5.0",
+                },
+                json={"slave_id": id},
+            )
+			
+def fetter_slave(id):
+    return requests.post(
+                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
+                    headers={
+                        "Content-Type": "application/json",
+                        "authorization": auth,
+                        "User-agent": "Mozilla/5.0",
+                    },
+                    json={
+                        "slave_id": id,
+                    },
+                )
+				
+def set_job(id):
+    return requests.post(
+                        "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
+                        headers={
+                            "Content-Type": "application/json",
+                            "authorization": auth,
+                            "User-agent": "Mozilla/5.0",
+                        },
+                        json={
+                            "slave_id": id,
+                            "name": job,
+                        },
+                    )
 
-def buy_slave():
+
+def get_data(id):
+	return requests.get(
+                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/user",
+                    headers={
+                        "Content-Type": "application/json",
+                        "authorization": auth,
+                        "User-agent": "Mozilla/5.0",
+                    },
+					params={"id": id}
+                ).json()
+				
+
+
+def buy_slaves():
     """
     Покупает рабов, даёт работу. Надевает оковы, если включено в config.json.
     """
@@ -21,15 +83,7 @@ def buy_slave():
                 # Случайный ID пользователя в промежутке
                 rand_slave = randint(1, 646412830)
             # Покупка раба
-            buySlave = requests.post(
-                "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buySlave",
-                headers={
-                    "Content-Type": "application/json",
-                    "authorization": auth,
-                    "User-agent": "Mozilla/5.0",
-                },
-                json={"slave_id": rand_slave},
-            )
+            buySlave = buy_slave(rand_slave)
 
             # Вывод информации о профиле
             profile = loads(buySlave.text)
@@ -41,24 +95,14 @@ def buy_slave():
 
             # Покупает оковы
             if config["buy_fetters"] == 1:
-                fetter_request = requests.post(
-                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter",
-                    headers={
-                        "Content-Type": "application/json",
-                        "authorization": auth,
-                        "User-agent": "Mozilla/5.0",
-                    },
-                    json={
-                        "slave_id": rand_slave,
-                    },
-                )
+                fetter_request = fetter_slave(rand_slave)
                 fetter_text = fetter_request.text
                 print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
             sleep(delay + random())
         except Exception as e:
             if not "line" in str(e):
                 print(e)
-            sleep(delay + random())
+        sleep(delay + random())
 
 
 def buy_fetter():
@@ -125,18 +169,7 @@ def job_slave():
                 # Проверка на наличие у раба работы
                 if not slave["job"]["name"]:
                     # Даёт рабу работу
-                    requests.post(
-                        "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave",
-                        headers={
-                            "Content-Type": "application/json",
-                            "authorization": auth,
-                            "User-agent": "Mozilla/5.0",
-                        },
-                        json={
-                            "slave_id": slave["id"],
-                            "name": job,
-                        },
-                    )
+                    set_job(slave['id'])
                     print(f"Дал работу vk.com/id{slave['id']}")
                     sleep(delay + random())
         except Exception as e:
@@ -144,16 +177,67 @@ def job_slave():
             	print(e)
             sleep(delay + random())
 
+def abuse_slaves(): 
+    while True:
+        try:
+            # Получение полной информации об аккаунте
+            start = loads(
+                requests.get(
+                    "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/start",
+                    headers={
+                        "Content-Type": "application/json",
+                        "authorization": auth,
+                        "User-agent": "Mozilla/5.0",
+                    },
+                ).text,
+            )
 
+                # Удаление из списка первого раба,
+                # чтобы не происходило коллизии с методом buy_slave
+            del start["slaves"][0]
+            # Перебор списка рабов
+            currStatus = get_data(userid)
+            currBalance = currStatus['balance']
+            for slave in start["slaves"]:
+                isAbused = False
+                
+                if (slave["sale_price"] < 19500):
+                    slavePrice = get_data(slave["id"])["sale_price"]
+                    if (currBalance > minBalance):
+                        while(slavePrice < 19500):
+                            if (currBalance > minBalance):
+                               sell_slave(slave["id"])
+                               sleep(delay + random())
+                               buy_slave(slave["id"])
+                               slavePrice = get_data(slave["id"])["sale_price"]
+                               isAbused = True
+                               sleep(delay + random())
+			 
+                if (isAbused):
+                    fetter_slave(slave["id"])
+                    sleep(delay + random())
+                    set_job(slave["id"])
+                    print(f"Заабузил vk.com/id{slave['id']}")
+                    sleep(delay + random())
+				
+        except Exception as e:
+            if not "line" in str(e):
+            	print(e)
+            sleep(delay + random())	
+			
 if __name__ == "__main__":
     with open("config.json") as f:
         config = load(f)
     auth = config["authorization"]
     delay = config["delay"]
     job = config["job"]
+    minBalance = config["minimum_balance"]
+    userid = config["your_id"]
     print("Бот запущен")
     if config["buy_slaves"] == 1:
-        Thread(target=buy_slave).start()
+        Thread(target=buy_slaves).start()
     if config["buy_fetters"] == 1:
         Thread(target=buy_fetter).start()
     Thread(target=job_slave).start()
+    if config["abuse_slaves"] == 1:
+        Thread(target=abuse_slaves).start()
