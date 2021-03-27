@@ -54,7 +54,7 @@ def buy_slave():
                 )
                 fetter_text = fetter_request.text
                 print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
-                sleep(delay + random())
+            sleep(delay + random())
         except Exception as e:
             if not "line" in str(e):
                 print(e)
