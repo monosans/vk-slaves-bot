@@ -4,10 +4,11 @@ from json import load, loads
 from random import randint, random
 from threading import Thread
 from time import sleep
-
+import time
 import requests
-
-
+def gettime():
+	loctime = time.ctime().split(" ")[3]
+	return loctime
 def buy_slave():
     """
     Покупает рабов, даёт работу. Надевает оковы, если включено в config.json.
@@ -34,12 +35,16 @@ def buy_slave():
             # Вывод информации о профиле
             profile = loads(buySlave.text)
             if "422" not in str(profile):
+
+                balance = profile['balance']
+                balance = '{0:,}'.format(balance).replace(',', ' ')
+                print(f"====[{time.ctime()}]====")
+                print(f"Баланс: "+str(balance))
                 print(
-                    f"""Баланс: {profile['balance']}
-Рабов: {profile['slaves_count']}
+                 f"""Рабов: {profile['slaves_count']}
 Доход в минуту: {profile['slaves_profit_per_min']}"""
                 )
-
+                print(f"==========================")
                 # Покупает оковы
                 if config["buy_fetters"] == 1:
                     fetter_request = requests.post(
@@ -55,7 +60,7 @@ def buy_slave():
                     )
                     fetter_text = fetter_request.text
                     if "422" not in str(fetter_text):
-                    	print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
+                        print(f"{gettime()}|Купил оковы vk.com/id{loads(fetter_text)['id']}")
                     sleep(delay + random())
         except Exception as e:
             if "Expecting value: line 1 column 1 (char 0)" not in str(e):
@@ -100,7 +105,7 @@ def buy_fetter():
                         },
                     )
                         if "422" not in str(req):
-                            print(f"Купил оковы vk.com/id{slave['id']}")
+                            print(f"{gettime()}|Купил оковы vk.com/id{slave['id']}")
                         sleep(delay + random())
         except Exception as e:
             if "Expecting value: line 1 column 1 (char 0)" not in str(e):
@@ -143,7 +148,7 @@ def job_slave():
                     )
                     #print(str(req)+"143")
                     if "422" not in str(req):
-                        print(f"Дал работу vk.com/id{slave['id']}")
+                        print(f"{gettime()}|Дал работу vk.com/id{slave['id']}")
                     sleep(delay + random())
         except Exception as e:
             if "Expecting value: line 1 column 1 (char 0)" not in str(e):
@@ -157,7 +162,7 @@ if __name__ == "__main__":
     auth = config["authorization"]
     delay = config["delay"]
     job = config["job"]
-    print("Бот запущен")
+    print(f"{gettime()}|Бот запущен")
     if config["buy_slaves"] == 1:
         Thread(target=buy_slave).start()
     if config["buy_fetters"] == 1:
