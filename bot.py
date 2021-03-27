@@ -67,11 +67,10 @@ def buy_slave():
                 )
                 fetter_text = fetter_request.text
                 print(f"Купил оковы vk.com/id{loads(fetter_text)['id']}")
-
-            # Задержка для обхода бана за флуд
-            sleep(delay + random())
+                sleep(delay + random())
         except Exception as e:
             print(e)
+            sleep(delay + random())
 
 
 def buy_fetter():
@@ -107,11 +106,10 @@ def buy_fetter():
                         },
                     )
                     print(f"Купил оковы vk.com/id{slave['id']}")
-
-                    # Задержка для обхода бана за флуд
                     sleep(delay + random())
         except Exception as e:
             print(e)
+            sleep(delay + random())
 
 
 def job_slave():
@@ -147,11 +145,10 @@ def job_slave():
                         },
                     )
                     print(f"Дал работу vk.com/id{slave['id']}")
-
-                    # Задержка для обхода бана за флуд
                     sleep(delay + random())
         except Exception as e:
             print(e)
+            sleep(delay + random())
 
 
 if __name__ == "__main__":
