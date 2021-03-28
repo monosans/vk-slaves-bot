@@ -26,6 +26,9 @@ def buy_slave():
                     "Content-Type": "application/json",
                     "authorization": auth,
                     "User-agent": "Mozilla/5.0",
+                    "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                    "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                    + auth,
                 },
                 json={"slave_id": rand_slave},
             )
@@ -49,6 +52,9 @@ def buy_slave():
                         "Content-Type": "application/json",
                         "authorization": auth,
                         "User-agent": "Mozilla/5.0",
+                        "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                        "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                        + auth,
                     },
                     json={
                         "slave_id": rand_slave,
@@ -73,6 +79,9 @@ def buy_fetter():
                     "Content-Type": "application/json",
                     "authorization": auth,
                     "User-agent": "Mozilla/5.0",
+                    "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                    "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                    + auth,
                 },
             ).json()
 
@@ -87,6 +96,9 @@ def buy_fetter():
                             "Content-Type": "application/json",
                             "authorization": auth,
                             "User-agent": "Mozilla/5.0",
+                            "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                            "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                            + auth,
                         },
                         json={
                             "slave_id": int(slave["id"]),
@@ -107,6 +119,9 @@ def buy_fetter():
                             "Content-Type": "application/json",
                             "authorization": auth,
                             "User-agent": "Mozilla/5.0",
+                            "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                            "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                            + auth,
                         },
                         json={
                             "slave_id": int(slave["id"]),
@@ -130,6 +145,9 @@ def job_slave():
                     "Content-Type": "application/json",
                     "authorization": auth,
                     "User-agent": "Mozilla/5.0",
+                    "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                    "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                    + auth,
                 },
             ).json()
 
@@ -144,6 +162,9 @@ def job_slave():
                             "Content-Type": "application/json",
                             "authorization": auth,
                             "User-agent": "Mozilla/5.0",
+                            "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+                            "referer": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com/index.html?"
+                            + auth,
                         },
                         json={
                             "slave_id": int(slave["id"]),
