@@ -1,9 +1,11 @@
 {
 	"authorization": "",
-	"buy_fetters": 1,
+	"my_id": 607137534,
 	"buy_slaves": 1,
-  	"invisible_slaves": 1,
-    "invisible_fetters": 1,
-	"delay": 4.5,
-	"job": "@free_slaves_bot"
+	"buy_fetters": 1,
+	"upgrade_slaves": 1,
+	"min_price": 40,
+	"max_price": 26151,
+	"job": ["@free_slaves_bot", "github.com/monosans"],
+	"delay": 4.5
 }
