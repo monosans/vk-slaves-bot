@@ -6,6 +6,6 @@
 	"upgrade_slaves": 1,
 	"min_price": 40,
 	"max_price": 26151,
-	"job": ["@free_slaves_bot", "github.com/monosans", "@club203543653"],
+	"job": ["@free_slaves_bot", "github.com/monosans"],
 	"delay": 4.5
 }
