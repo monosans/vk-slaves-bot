@@ -5,7 +5,7 @@
   "buy_fetters": 1,
   "upgrade_slaves": 1,
   "max_price": 26151,
-  "top_hate": 1,
+  "top_hate": 0,
   "job": ["@free_slaves_bot", "github.com/monosans", "@club203543653"],
   "delay": 4.5
 }
