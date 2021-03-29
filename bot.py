@@ -164,20 +164,20 @@ def upgrade_slaves():
             sleep(delay + random())
 
 def buy_by_id():
-	while True:
-		try:
-			id_user_slaves = get_slave_list(int(user_id))
+    while True:
+        try:
+            id_user_slaves = get_slave_list(int(user_id))
             if "slaves" in id_user_slaves.keys():
-        		for slave in id_user_slaves["slaves"]:
-           		if int(slave["fetter_to"]) == 0:
-                	slave_id = slave["id"]
-                	slave_info = get_user(slave_id)
-                	if slave_info["price"] <= max_price:
-                    	# Покупка раба
-                    	buy_slave(slave_id)
-                    	me = get_user(my_id)
+                for slave in id_user_slaves["slaves"]:
+                   if int(slave["fetter_to"]) == 0:
+                    slave_id = slave["id"]
+                    slave_info = get_user(slave_id)
+                    if slave_info["price"] <= max_price:
+                        # Покупка раба
+                        buy_slave(slave_id)
+                        me = get_user(my_id)
 
-                                    print(
+                        print(
                                         f"""\n==[{strftime("%d.%m.%Y %H:%M:%S")}]==
 Купил id{slave_info["id"]} за {slave_info["price"]} у id{top_user["id"]}
 Баланс: {"{:,}".format(me['balance'])}
@@ -187,16 +187,16 @@ def buy_by_id():
                                     )
 
                                     # Прокачивает раба
-                                    if conf_upgrade_slaves == 1:
-                                        upgrade_slave(me, slave_id)
+                        if conf_upgrade_slaves == 1:
+                            upgrade_slave(me, slave_id)
 
-                                    # Покупает оковы только что купленному рабу
-                                    if buy_fetters == 1:
-                                        buy_fetter(slave_id)
-                                        print(
-                                            f"Купил оковы vk.com/id{slave_id}"
-                                        )
-                                    sleep(delay + random())
+                        # Покупает оковы только что купленному рабу
+                        if buy_fetters == 1:
+                            buy_fetter(slave_id)
+                            print(
+                                f"Купил оковы vk.com/id{slave_id}"
+                            )
+            sleep(delay + random())
         except Exception as e:
             print(e.args)
             sleep(delay + random())
@@ -365,8 +365,8 @@ github.com/monosans/vk-slaves-bot
     # Создание фейкового UserAgent для избежания бана
     ua = UserAgent(cache=False).random
     if user_id != "":
-    	print("Включена покупка рабов у определённого пользователя.")
-    	Thread(target=buy_by_id).start()
+        print("Включена покупка рабов у определённого пользователя.")
+        Thread(target=buy_by_id).start()
     if conf_buy_slaves == 1 and top_hate == 0:
         print("Включена покупка случайных рабов.")
         Thread(target=buy_slaves).start()
