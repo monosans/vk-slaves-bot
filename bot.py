@@ -137,14 +137,14 @@ def upgrade_slave(me, slave_id):
         # Проверка на то, хватит ли баланса для прокачки
         if int(me["balance"]) >= 39214:
             try:
-                slave_price = int(get_user(slave_id))["price"]
+                slave_price = int(get_user(slave_id)["price"])
                 while slave_price <= 26151:
                     sell_slave(slave_id)
                     print(f"Продал id{slave_id} для улучшения")
                     buy_slave(slave_id)
                     print(f"Улучшил id{slave_id}")
                     sleep(delay + random())
-                    slave_price = int(get_user(slave_id))["price"]
+                    slave_price = int(get_user(slave_id)["price"])
             except Exception as e:
                 print(e.args)
                 sleep(delay + random())
@@ -306,7 +306,7 @@ if __name__ == "__main__":
     print(
         """vk.com/free_slaves_bot
 github.com/monosans/vk-slaves-bot
-Версия 3.0""",
+Версия 3.1""",
     )
 
     # Конфиг
