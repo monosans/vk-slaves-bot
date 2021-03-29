@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import sys
-from json import load
+from json import dump, load
 from random import choice, randint, random
 from threading import Thread
 from time import sleep, strftime
@@ -110,24 +110,15 @@ def get_top_users():
 
 def get_start():
     """Получает полную информацию о своём профиле."""
-    while True:
-        try:
-            global good_start
-            start = get(
-                "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/start",
-                headers={
-                    "Content-Type": "application/json",
-                    "authorization": auth,
-                    "User-agent": ua,
-                    "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
-                },
-            ).json()
-            if "slaves" in start.keys():
-                good_start = start
-            sleep(delay + random())
-        except Exception as e:
-            print(e.args)
-            sleep(delay + random())
+    return get(
+        "https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/start",
+        headers={
+            "Content-Type": "application/json",
+            "authorization": auth,
+            "User-agent": ua,
+            "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
+        },
+    ).json()
 
 
 def upgrade_slave(me, slave_id):
@@ -156,7 +147,7 @@ def upgrade_slaves():
     while True:
         try:
             # Перебор списка рабов
-            for slave in good_start["slaves"]:
+            for slave in get_start["slaves"]:
                 balance = get_user(my_id)["balance"]
                 if int(balance) >= 39214:
                     slave_price = get_user(slave["id"])["price"]
@@ -265,7 +256,7 @@ def buy_fetters():
     """Покупает оковы тем, у кого их нет."""
     while True:
         try:
-            slaves = good_start["slaves"]
+            slaves = get_start()["slaves"]
 
             # Удаление первого раба из списка, чтобы не происходило коллизии с прокачкой
             if conf_upgrade_slaves == 1:
@@ -287,11 +278,11 @@ def job_slaves():
     """Даёт безработным работу."""
     while True:
         try:
-            slaves = good_start["slaves"]
+            slaves = get_start()["slaves"]
             if conf_buy_slaves == 0 and conf_buy_fetters == 1:
                 del slaves[0]
             # Перебор списка рабов
-            for slave in good_start["slaves"]:
+            for slave in slaves:
                 # Проверка на наличие у раба работы
                 if not slave["job"]["name"]:
                     job_slave(int(slave["id"]))
@@ -306,7 +297,7 @@ if __name__ == "__main__":
     print(
         """vk.com/free_slaves_bot
 github.com/monosans/vk-slaves-bot
-Версия 3.1""",
+Версия 3.2""",
     )
 
     # Конфиг
@@ -330,15 +321,9 @@ github.com/monosans/vk-slaves-bot
     conf_upgrade_slaves = int(config["upgrade_slaves"])
 
     # Нужная глобальные переменные
-    good_start = {}
 
     # Создание фейкового UserAgent для избежания бана
     ua = UserAgent(cache=False).random
-
-    Thread(target=get_start).start()
-
-    # Задержка, чтобы успеть получить start
-    sleep(3)
 
     if conf_buy_slaves == 1 and top_hate == 0:
         print("Включена покупка случайных рабов.")
