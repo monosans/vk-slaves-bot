@@ -225,8 +225,8 @@ def buy_slaves():
 
             # Проверка раба на соотвествие настройкам цены
             while (
-                int(slave_info["price"]) >= max_price
-                or int(slave_info["price"]) <= min_price
+                int(slave_info["price"]) > max_price
+                or int(slave_info["price"]) < min_price
             ):
                 slave_id = randint(1, 646959225)
                 slave_info = get_user(slave_id)
@@ -363,7 +363,7 @@ if __name__ == "__main__":
     print(
         """vk.com/free_slaves_bot
 github.com/monosans/vk-slaves-bot
-Версия 3.7""",
+Версия 3.8""",
     )
 
     # Конфиг
