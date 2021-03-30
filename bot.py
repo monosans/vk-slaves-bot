@@ -371,7 +371,7 @@ github.com/monosans/vk-slaves-bot
         try:
             config = load(f)
         except:
-            print("Неверный конфиг")
+            print("Конфиг настроен некорректно.")
             sys.exit()
     auth = str(config["authorization"])
     buy_slaves_mode = int(config["buy_slaves_mode"])
