@@ -1,12 +1,12 @@
 {
   "authorization": "",
   "my_id": 607137534,
-  "buy_slaves": 1,
-  "buy_fetters": 0,
+  "buy_slaves_mode": 1,
+  "buy_from_ids": [380681805, 596833590, 328372664],
+  "buy_fetters": 1,
   "upgrade_slaves": 0,
   "min_price": 40,
   "max_price": 26151,
-  "top_hate": 0,
   "job": ["@free_slaves_bot", "github.com/monosans", "@club203543653"],
   "delay": 4.5
 }
