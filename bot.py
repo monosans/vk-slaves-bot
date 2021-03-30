@@ -304,7 +304,9 @@ def buy_from_ids():
                                     )
                                     if fetter_price <= max_fetter_price:
                                         buy_fetter(slave_id)
-                                        print(f"Купил оковы vk.com/id{slave_id} за {fetter_price}")
+                                        print(
+                                            f"Купил оковы vk.com/id{slave_id} за {fetter_price}"
+                                        )
                                 sleep(delay + random())
         except Exception as e:
             print(e.args)
@@ -329,7 +331,9 @@ def buy_fetters():
                     fetter_price = int(get_user(slave["id"])["fetter_price"])
                     if fetter_price <= max_fetter_price:
                         buy_fetter(slave["id"])
-                        print(f"Купил оковы vk.com/id{slave["id"]} за {fetter_price}")
+                        print(
+                            f"Купил оковы vk.com/id{slave['id']} за {fetter_price}"
+                        )
                         sleep(delay + random())
         except Exception as e:
             print(e.args)
@@ -359,7 +363,7 @@ if __name__ == "__main__":
     print(
         """vk.com/free_slaves_bot
 github.com/monosans/vk-slaves-bot
-Версия 3.6""",
+Версия 3.7""",
     )
 
     # Конфиг
