@@ -1,4 +1,4 @@
-python -m pip install -U fake-useragent requests
+python -m pip install -U requests
 cls
 python bot.py
 Pause

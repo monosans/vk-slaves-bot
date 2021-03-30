@@ -6,7 +6,6 @@ from random import choice, randint, random
 from threading import Thread
 from time import sleep, strftime
 
-from fake_useragent import UserAgent
 from requests import get, post
 
 
@@ -17,7 +16,7 @@ def buy_slave(id):
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
         json={"slave_id": id},
@@ -31,7 +30,7 @@ def buy_fetter(id):
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
         json={"slave_id": id},
@@ -45,7 +44,7 @@ def sell_slave(id):
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
         json={"slave_id": id},
@@ -59,7 +58,7 @@ def job_slave(id):
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
         json={
@@ -76,7 +75,7 @@ def get_user(id):
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
     ).json()
@@ -89,7 +88,7 @@ def get_slave_list(id):
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
     ).json()
@@ -102,7 +101,7 @@ def get_top_users():
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
     ).json()
@@ -115,7 +114,7 @@ def get_start():
         headers={
             "Content-Type": "application/json",
             "authorization": auth,
-            "User-agent": ua,
+            "User-agent": "Mozilla/5.0",
             "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
         },
     ).json()
@@ -177,7 +176,10 @@ def buy_top_users_slaves():
                             if int(slave["fetter_to"]) == 0:
                                 slave_id = slave["id"]
                                 slave_info = get_user(slave_id)
-                                if slave_info["price"] <= max_price:
+                                if (
+                                    slave_info["price"] <= max_price
+                                    and slave_info["price"] >= min_price
+                                ):
                                     # Покупка раба
                                     buy_slave(slave_id)
 
@@ -218,7 +220,10 @@ def buy_slaves():
             slave_info = get_user(slave_id)
 
             # Проверка раба на соотвествие настройкам цены
-            while int(slave_info["price"]) >= max_price:
+            while (
+                int(slave_info["price"]) >= max_price
+                or int(slave_info["price"]) <= min_price
+            ):
                 slave_id = randint(1, 646959225)
                 slave_info = get_user(slave_id)
 
@@ -258,7 +263,8 @@ def buy_fetters():
         try:
             slaves = get_start()["slaves"]
 
-            # Удаление первого раба из списка, чтобы не происходило коллизии с прокачкой
+            # Удаление первого раба из списка,
+            # чтобы не происходило коллизии с прокачкой
             if conf_upgrade_slaves == 1:
                 del slaves[0]
 
@@ -297,7 +303,7 @@ if __name__ == "__main__":
     print(
         """vk.com/free_slaves_bot
 github.com/monosans/vk-slaves-bot
-Версия 3.3""",
+Версия 3.4""",
     )
 
     # Конфиг
@@ -316,14 +322,10 @@ github.com/monosans/vk-slaves-bot
         job = list(config["job"])
     except:
         job = str(config["job"])
+    min_price = int(config["min_price"])
     max_price = int(config["max_price"])
     my_id = int(config["my_id"])
     conf_upgrade_slaves = int(config["upgrade_slaves"])
-
-    # Нужная глобальные переменные
-
-    # Создание фейкового UserAgent для избежания бана
-    ua = UserAgent(cache=False).random
 
     if conf_buy_slaves == 1 and top_hate == 0:
         print("Включена покупка случайных рабов.")

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-python -m pip install -U fake-useragent requests
+python -m pip install -U requests
 cd ~/vk-slaves-bot
 clear
 python bot.py
