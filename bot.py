@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import sys
-from json import load
+from json import dump, load
 from random import choice, randint, random
 from threading import Thread
 from time import sleep, strftime
@@ -147,7 +147,7 @@ def upgrade_slaves():
     while True:
         try:
             # Перебор списка рабов
-            for slave in get_start()["slaves"]:
+            for slave in get_start["slaves"]:
                 balance = get_user(my_id)["balance"]
                 if int(balance) >= 39214:
                     slave_price = get_user(slave["id"])["price"]
@@ -162,6 +162,45 @@ def upgrade_slaves():
         except Exception as e:
             print(e.args)
             sleep(delay + random())
+
+def buy_by_id():
+    while True:
+        try:
+            id_user_slaves = get_slave_list(int(user_id))
+            if "slaves" in id_user_slaves.keys():
+                for slave in id_user_slaves["slaves"]:
+                   if int(slave["fetter_to"]) == 0:
+                    slave_id = slave["id"]
+                    slave_info = get_user(slave_id)
+                    if slave_info["price"] <= max_price:
+                        # Покупка раба
+                        buy_slave(slave_id)
+                        me = get_user(my_id)
+
+                        print(
+                                        f"""\n==[{strftime("%d.%m.%Y %H:%M:%S")}]==
+Купил id{slave_info["id"]} за {slave_info["price"]} у id{top_user["id"]}
+Баланс: {"{:,}".format(me['balance'])}
+Рабов: {"{:,}".format(me['slaves_count'])}
+Доход в минуту: {"{:,}".format(me['slaves_profit_per_min'])}
+Место в рейтинге: {"{:,}".format(me['rating_position'])}\n""",
+                                    )
+
+                                    # Прокачивает раба
+                        if conf_upgrade_slaves == 1:
+                            upgrade_slave(me, slave_id)
+
+                        # Покупает оковы только что купленному рабу
+                        if buy_fetters == 1:
+                            buy_fetter(slave_id)
+                            print(
+                                f"Купил оковы vk.com/id{slave_id}"
+                            )
+            sleep(delay + random())
+        except Exception as e:
+            print(e.args)
+            sleep(delay + random())
+
 
 
 def buy_top_users_slaves():
@@ -297,7 +336,7 @@ if __name__ == "__main__":
     print(
         """vk.com/free_slaves_bot
 github.com/monosans/vk-slaves-bot
-Версия 3.3""",
+Версия 3.2""",
     )
 
     # Конфиг
@@ -307,6 +346,7 @@ github.com/monosans/vk-slaves-bot
         except:
             print("Неверный конфиг")
             sys.exit()
+    user_id = str(config["user_id"])
     auth = str(config["authorization"])
     conf_buy_fetters = int(config["buy_fetters"])
     conf_buy_slaves = int(config["buy_slaves"])
@@ -324,7 +364,9 @@ github.com/monosans/vk-slaves-bot
 
     # Создание фейкового UserAgent для избежания бана
     ua = UserAgent(cache=False).random
-
+    if user_id != "":
+        print("Включена покупка рабов у определённого пользователя.")
+        Thread(target=buy_by_id).start()
     if conf_buy_slaves == 1 and top_hate == 0:
         print("Включена покупка случайных рабов.")
         Thread(target=buy_slaves).start()
