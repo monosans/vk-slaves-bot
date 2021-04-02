@@ -8,7 +8,7 @@
   "min_price": 40,
   "max_price": 26151,
   "max_fetter_price": 35303,
-  "job": ["@free_slaves_bot", "github.com/monosans", "@club203543653"],
+  "job": ["github.com/monosans"],
   "min_delay": 2.5,
   "max_delay": 4.5
 }

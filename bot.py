@@ -222,7 +222,7 @@ def buy_top_users_slaves():
 Купил id{slave_info["id"]} за {slave_info["price"]} у id{top_user["id"]}
 Баланс: {"{:,}".format(profile['balance'])}
 Рабов: {"{:,}".format(profile['slaves_count'])}
-Доход в минуту: {"{:,}".format(profile['slaves_profit_per_min'])}\n
+Доход в минуту: {"{:,}".format(profile['slaves_profit_per_min'])}
 Место в топе дохода: {"{:,}".format(profile['rating_position'])}\n""",
                                         )
 
