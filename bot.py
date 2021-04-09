@@ -379,10 +379,10 @@ github.com/monosans/vk-slaves-bot
         print("Включена покупка случайных рабов")
         Thread(target=buy_slaves).start()
     elif buy_slaves_mode == 2:
-        print("Включена перекупка рабов у топеров")
+        print("Включена перекупка у топеров")
         Thread(target=buy_top_users_slaves).start()
     elif buy_slaves_mode == 3:
-        print("Включена перекупка у IDшников из config.py")
+        print("Включена перекупка у buy_from_ids из config.py")
         Thread(target=buy_slaves_from_ids).start()
     elif upgrade_slaves == 1 and buy_slaves_mode == 0:
         Thread(target=slaves_upgrade).start()
