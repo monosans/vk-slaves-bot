@@ -146,7 +146,7 @@ def slaves_upgrade():
                                     while slave_info["price"] <= 26151:
                                         sell_slave(slave["id"])
                                         print(
-                                            f"Продал id{slave['id']} для улучшения"
+                                            f"Продал id{slave['id']} для улучшения",
                                         )
                                         buy_slave(slave["id"])
                                         print(f"Улучшил id{slave['id']}")
@@ -206,7 +206,7 @@ def buy_top_users_slaves():
                                             ):
                                                 buy_fetter(slave_id)
                                                 print(
-                                                    f"Купил оковы id{slave_id} за {fetter_price}"
+                                                    f"Купил оковы id{slave_id} за {fetter_price}",
                                                 )
                                         sleep(uniform(min_delay, max_delay))
         except Exception as e:
@@ -306,7 +306,7 @@ def buy_slaves_from_ids():
                                         if fetter_price <= max_fetter_price:
                                             buy_fetter(slave_id)
                                             print(
-                                                f"Купил оковы id{slave_id} за {fetter_price}"
+                                                f"Купил оковы id{slave_id} за {fetter_price}",
                                             )
                                     sleep(uniform(min_delay, max_delay))
         except Exception as e:
@@ -333,7 +333,7 @@ def set_fetters():
                         if slave["fetter_price"] <= max_fetter_price:
                             buy_fetter(slave["id"])
                             print(
-                                f"Купил оковы id{slave['id']} за {slave['fetter_price']}"
+                                f"Купил оковы id{slave['id']} за {slave['fetter_price']}",
                             )
                             sleep(uniform(min_delay, max_delay))
         except Exception as e:
@@ -384,8 +384,8 @@ github.com/monosans/vk-slaves-bot
     elif buy_slaves_mode == 3:
         print("Включена перекупка у IDшников из config.py")
         Thread(target=buy_slaves_from_ids).start()
-    if upgrade_slaves == 1 and buy_slaves_mode == 0:
-        Thread(target=upgrade_slaves).start()
+    elif upgrade_slaves == 1 and buy_slaves_mode == 0:
+        Thread(target=slaves_upgrade).start()
     if buy_fetters == 1:
-        Thread(target=buy_fetters).start()
+        Thread(target=set_fetters).start()
     Thread(target=job_slaves).start()
