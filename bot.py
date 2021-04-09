@@ -263,7 +263,7 @@ def buy_slaves():
 
 
 def buy_slaves_from_ids():
-    """То же самое, что и buy_slaves, только перекупает рабов из списка в config.py."""
+    """То же самое, что и buy_slaves, только перекупает рабов у buy_from_ids в config.py."""
     while True:
         try:
             for id in buy_from_ids:
