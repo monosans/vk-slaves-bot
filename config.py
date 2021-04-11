@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# github.com/monosans/vk-slaves-bot
 authorization = ""
 my_id = 607137534
 buy_slaves_mode = 1

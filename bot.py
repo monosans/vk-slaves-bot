@@ -3,6 +3,7 @@
 from random import choice, randint, uniform
 from threading import Thread
 from time import sleep, strftime
+from traceback import print_exc
 
 from requests import get, post
 
@@ -122,10 +123,9 @@ def upgrade_slave(slave_id):
                             print(f"Улучшил id{slave_id}")
                             sleep(uniform(min_delay, max_delay))
                             slave_info = get_user(slave_id)
-            except Exception as e:
-                print(e.args)
+            except:
+                print_exc()
                 sleep(uniform(min_delay, max_delay))
-                pass
 
 
 def slaves_upgrade():
@@ -153,8 +153,8 @@ def slaves_upgrade():
                                         sleep(uniform(min_delay, max_delay))
                                         slave_info = get_user(slave["id"])
                                         balance = get_user(my_id)["balance"]
-        except Exception as e:
-            print(e.args)
+        except:
+            print_exc()
             sleep(uniform(min_delay, max_delay))
 
 
@@ -209,8 +209,8 @@ def buy_top_users_slaves():
                                                     f"Купил оковы id{slave_id} за {fetter_price}",
                                                 )
                                         sleep(uniform(min_delay, max_delay))
-        except Exception as e:
-            print(e.args)
+        except:
+            print_exc()
             sleep(uniform(min_delay, max_delay))
 
 
@@ -257,8 +257,8 @@ def buy_slaves():
                         buy_fetter(slave_id)
                         print(f"Купил оковы id{slave_id} за {fetter_price}")
                 sleep(uniform(min_delay, max_delay))
-        except Exception as e:
-            print(e.args)
+        except:
+            print_exc()
             sleep(uniform(min_delay, max_delay))
 
 
@@ -309,8 +309,8 @@ def buy_slaves_from_ids():
                                                 f"Купил оковы id{slave_id} за {fetter_price}",
                                             )
                                     sleep(uniform(min_delay, max_delay))
-        except Exception as e:
-            print(e.args)
+        except:
+            print_exc()
             sleep(uniform(min_delay, max_delay))
 
 
@@ -336,8 +336,8 @@ def set_fetters():
                                 f"Купил оковы id{slave['id']} за {slave['fetter_price']}",
                             )
                             sleep(uniform(min_delay, max_delay))
-        except Exception as e:
-            print(e.args)
+        except:
+            print_exc()
             sleep(uniform(min_delay, max_delay))
 
 
@@ -357,8 +357,8 @@ def job_slaves():
                         job_slave(slave["id"])
                         print(f"Дал работу id{slave['id']}")
                         sleep(uniform(min_delay, max_delay))
-        except Exception as e:
-            print(e.args)
+        except:
+            print_exc()
             sleep(uniform(min_delay, max_delay))
 
 
@@ -371,7 +371,7 @@ github.com/monosans/vk-slaves-bot
     headers = {
         "Content-Type": "application/json",
         "authorization": authorization,
-        "User-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.51 Safari/537.36",
+        "User-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36",
         "origin": "https://prod-app7794757-c1ffb3285f12.pages-ac.vk-apps.com",
     }
     # Запуск
